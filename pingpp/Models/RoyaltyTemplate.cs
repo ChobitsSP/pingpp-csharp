@@ -29,9 +29,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="createParams"></param>
         /// <returns></returns>
-        public static RoyaltyTemplate Create(Dictionary<string, object> createParams)
+        public RoyaltyTemplate Create(Dictionary<string, object> createParams)
         {
-            var royaltyTemplate = Requestor.DoRequest(BaseUrl, "POST", createParams);
+            var royaltyTemplate = base.DoRequest(BaseUrl, "POST", createParams);
             return Mapper<RoyaltyTemplate>.MapFromJson(royaltyTemplate);
         }
 
@@ -40,9 +40,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="royaltyTemplateId"></param>
         /// <returns></returns>
-        public static RoyaltyTemplate Retrieve(string royaltyTemplateId)
+        public RoyaltyTemplate Retrieve(string royaltyTemplateId)
         {
-            var royaltyTemplate = Requestor.DoRequest(string.Format("{0}/{1}", BaseUrl, royaltyTemplateId), "GET");
+            var royaltyTemplate = base.DoRequest(string.Format("{0}/{1}", BaseUrl, royaltyTemplateId), "GET");
             return Mapper<RoyaltyTemplate>.MapFromJson(royaltyTemplate);
         }
         /// <summary>
@@ -51,9 +51,9 @@ namespace Pingpp.Models
         /// <param name="royaltyTemplateId"></param>
         /// <param name="updateParams"></param>
         /// <returns></returns>
-        public static RoyaltyTemplate Update(string royaltyTemplateId, Dictionary<string, object> updateParams)
+        public RoyaltyTemplate Update(string royaltyTemplateId, Dictionary<string, object> updateParams)
         {
-            var royaltyTemplate = Requestor.DoRequest(string.Format("{0}/{1}", BaseUrl, royaltyTemplateId), "PUT", updateParams);
+            var royaltyTemplate = base.DoRequest(string.Format("{0}/{1}", BaseUrl, royaltyTemplateId), "PUT", updateParams);
             return Mapper<RoyaltyTemplate>.MapFromJson(royaltyTemplate);
         }
 
@@ -62,15 +62,15 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="royaltyTemplateId"></param>
         /// <returns></returns>
-        public static Deleted Delete(string royaltyTemplateId)
+        public Deleted Delete(string royaltyTemplateId)
         {
-            var royaltyTemplate = Requestor.DoRequest(string.Format("{0}/{1}", BaseUrl, royaltyTemplateId), "DELETE");
+            var royaltyTemplate = base.DoRequest(string.Format("{0}/{1}", BaseUrl, royaltyTemplateId), "DELETE");
             return Mapper<Deleted>.MapFromJson(royaltyTemplate);
         }
 
-        public static RoyaltyTemplateList List(Dictionary<string, object> listParams = null)
+        public RoyaltyTemplateList List(Dictionary<string, object> listParams = null)
         {
-            var royaltyTemplateList = Requestor.DoRequest(Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams)), "GET");
+            var royaltyTemplateList = base.DoRequest(Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams)), "GET");
             return Mapper<RoyaltyTemplateList>.MapFromJson(royaltyTemplateList);
         }
     }

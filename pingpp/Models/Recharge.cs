@@ -54,20 +54,20 @@ namespace Pingpp.Models
         /// 创建 recharge
         /// </summary>
         /// <returns></returns>
-        public static Recharge Create(string appId, Dictionary<string, object> createParams)
+        public Recharge Create(string appId, Dictionary<string, object> createParams)
         {
-            var recharge = Requestor.DoRequest(string.Format(BaseUrl, appId), "POST", createParams);
+            var recharge = base.DoRequest(string.Format(BaseUrl, appId), "POST", createParams);
             return Mapper<Recharge>.MapFromJson(recharge);
         }
 
-        public static Recharge Retrieve(string appId, string id)
+        public Recharge Retrieve(string appId, string id)
         {
-            var recharge = Requestor.DoRequest(string.Format("{0}/{1}", string.Format(BaseUrl, appId), id), "GET");
+            var recharge = base.DoRequest(string.Format("{0}/{1}", string.Format(BaseUrl, appId), id), "GET");
             return Mapper<Recharge>.MapFromJson(recharge);
         }
-        public static RechargeList List(string appId, Dictionary<string, object> listParams = null)
+        public RechargeList List(string appId, Dictionary<string, object> listParams = null)
         {
-            var rechargeList = Requestor.DoRequest(Requestor.FormatUrl(string.Format(BaseUrl, appId), Requestor.CreateQuery(listParams)), "GET");
+            var rechargeList = base.DoRequest(Requestor.FormatUrl(string.Format(BaseUrl, appId), Requestor.CreateQuery(listParams)), "GET");
             return Mapper<RechargeList>.MapFromJson(rechargeList);
         }
     }

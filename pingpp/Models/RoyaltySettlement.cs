@@ -59,9 +59,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static RoyaltySettlement Create(Dictionary<string, object> param) 
+        public RoyaltySettlement Create(Dictionary<string, object> param) 
         {
-            var royaltySettlement = Requestor.DoRequest(BaseUrl, "POST", param);
+            var royaltySettlement = base.DoRequest(BaseUrl, "POST", param);
             return Mapper<RoyaltySettlement>.MapFromJson(royaltySettlement);
         }
 
@@ -70,10 +70,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="royaltySettlementId"></param>
         /// <returns></returns>
-        public static RoyaltySettlement Retrieve(string royaltySettlementId) 
+        public RoyaltySettlement Retrieve(string royaltySettlementId) 
         {
             var url = string.Format("{0}/{1}", BaseUrl, royaltySettlementId);
-            var royaltySettlement = Requestor.DoRequest(url, "GET");
+            var royaltySettlement = base.DoRequest(url, "GET");
             return Mapper<RoyaltySettlement>.MapFromJson(royaltySettlement);
         }
 
@@ -83,10 +83,10 @@ namespace Pingpp.Models
         /// <param name="royaltySettlementId"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static RoyaltySettlement Update(string royaltySettlementId, Dictionary<string, object> param) 
+        public RoyaltySettlement Update(string royaltySettlementId, Dictionary<string, object> param) 
         {
             var url = string.Format("{0}/{1}", BaseUrl, royaltySettlementId);
-            var royaltySettlement = Requestor.DoRequest(url, "PUT", param);
+            var royaltySettlement = base.DoRequest(url, "PUT", param);
             return Mapper<RoyaltySettlement>.MapFromJson(royaltySettlement);
         }
 
@@ -95,10 +95,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="listParam"></param>
         /// <returns></returns>
-        public static RoyaltySettlementList List(Dictionary<string, object> listParam = null) 
+        public RoyaltySettlementList List(Dictionary<string, object> listParam = null) 
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParam));
-            var royaltySettlements = Requestor.DoRequest(url, "GET");
+            var royaltySettlements = base.DoRequest(url, "GET");
             return Mapper<RoyaltySettlementList>.MapFromJson(royaltySettlements);
         }
     }

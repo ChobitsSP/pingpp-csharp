@@ -9,7 +9,7 @@ namespace Pingpp.Models
     /// <summary>
     /// 签约对象
     /// </summary>
-    public class Agreement :Pingpp
+    public class Agreement : Pingpp
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -51,9 +51,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static Agreement Create(Dictionary<string, object> param)
+        public Agreement Create(Dictionary<string, object> param)
         {
-            var agreement = Requestor.DoRequest(BaseUrl, "POST", param);
+            var agreement = base.DoRequest(BaseUrl, "POST", param);
             return Mapper<Agreement>.MapFromJson(agreement);
         }
 
@@ -62,9 +62,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public static Agreement Retrieve(string Id) 
+        public Agreement Retrieve(string Id)
         {
-            var agreement = Requestor.DoRequest(string.Format("{0}/{1}", BaseUrl, Id), "GET");
+            var agreement = base.DoRequest(string.Format("{0}/{1}", BaseUrl, Id), "GET");
             return Mapper<Agreement>.MapFromJson(agreement);
         }
 
@@ -73,10 +73,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public static Agreement Cancel(string Id) 
+        public Agreement Cancel(string Id)
         {
-            Dictionary<string, object> param = new Dictionary<string, object> {{ "status", "canceled" }};
-            var agreement = Requestor.DoRequest(string.Format("{0}/{1}", BaseUrl, Id), "PUT", param);
+            Dictionary<string, object> param = new Dictionary<string, object> { { "status", "canceled" } };
+            var agreement = base.DoRequest(string.Format("{0}/{1}", BaseUrl, Id), "PUT", param);
             return Mapper<Agreement>.MapFromJson(agreement);
         }
 
@@ -85,9 +85,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static AgreementList List(Dictionary<string, object> listParams) 
+        public AgreementList List(Dictionary<string, object> listParams)
         {
-            var agreementList = Requestor.DoRequest(Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams)), "GET");
+            var agreementList = base.DoRequest(Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams)), "GET");
             return Mapper<AgreementList>.MapFromJson(agreementList);
         }
     }

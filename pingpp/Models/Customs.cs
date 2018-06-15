@@ -63,16 +63,16 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/customs";
 
-        public static Customs Create(Dictionary<string, object> cuParams)
+        public Customs Create(Dictionary<string, object> cuParams)
         {
-            var customs = Requestor.DoRequest(BaseUrl, "POST", cuParams);
+            var customs = base.DoRequest(BaseUrl, "POST", cuParams);
             return Mapper<Customs>.MapFromJson(customs);
         }
 
-        public static Customs Retrieve(string cuId)
+        public Customs Retrieve(string cuId)
         {
             var url = string.Format("{0}/{1}", BaseUrl, cuId);
-            var customs = Requestor.DoRequest(url, "GET");
+            var customs = base.DoRequest(url, "GET");
             return Mapper<Customs>.MapFromJson(customs);
         }
     }

@@ -32,9 +32,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="Params"></param>
         /// <returns></returns>
-        public static CardInfo Query(Dictionary<string, object> Params)
+        public CardInfo Query(Dictionary<string, object> Params)
         {
-            var cardInfo = Requestor.DoRequest(BaseUrl, "POST", Params);
+            var cardInfo = base.DoRequest(BaseUrl, "POST", Params);
             return Mapper<CardInfo>.MapFromJson(cardInfo);
         }
     }

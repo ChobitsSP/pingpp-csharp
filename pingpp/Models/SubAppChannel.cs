@@ -36,10 +36,10 @@ namespace Pingpp.Models
         /// <param name="subAppId"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static SubAppChannel Create(string appId, string subAppId, Dictionary<string, object> param) 
+        public SubAppChannel Create(string appId, string subAppId, Dictionary<string, object> param) 
         {
             var url = string.Format(BaseUrl, appId, subAppId);
-            var chl = Requestor.DoRequest(url, "POST", param);
+            var chl = base.DoRequest(url, "POST", param);
             return Mapper<SubAppChannel>.MapFromJson(chl);
         }
 
@@ -51,10 +51,10 @@ namespace Pingpp.Models
         /// <param name="channel"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static SubAppChannel Update(string appId, string subAppId, string channel, Dictionary<string, object> param) 
+        public SubAppChannel Update(string appId, string subAppId, string channel, Dictionary<string, object> param) 
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId, subAppId), channel);
-            var chl = Requestor.DoRequest(url, "PUT", param);
+            var chl = base.DoRequest(url, "PUT", param);
             return Mapper<SubAppChannel>.MapFromJson(chl);
         }
 
@@ -65,10 +65,10 @@ namespace Pingpp.Models
         /// <param name="subAppId"></param>
         /// <param name="channel"></param>
         /// <returns></returns>
-        public static SubAppChannel Retrieve(string appId, string subAppId, string channel) 
+        public SubAppChannel Retrieve(string appId, string subAppId, string channel) 
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId, subAppId), channel);
-            var chl = Requestor.DoRequest(url, "GET");
+            var chl = base.DoRequest(url, "GET");
             return Mapper<SubAppChannel>.MapFromJson(chl);
         }
 
@@ -79,10 +79,10 @@ namespace Pingpp.Models
         /// <param name="subAppId"></param>
         /// <param name="channel"></param>
         /// <returns></returns>
-        public static DeletedSubAppChannel Delete(string appId, string subAppId, string channel) 
+        public DeletedSubAppChannel Delete(string appId, string subAppId, string channel) 
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId, subAppId), channel);
-            var res = Requestor.DoRequest(url, "DELETE");
+            var res = base.DoRequest(url, "DELETE");
             return Mapper<DeletedSubAppChannel>.MapFromJson(res);
         }
     }

@@ -69,23 +69,23 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/red_envelopes";
 
-        public static RedEnvelope Create(Dictionary<string, object> redParams)
+        public RedEnvelope Create(Dictionary<string, object> redParams)
         {
-            var red = Requestor.DoRequest(BaseUrl, "POST", redParams);
+            var red = base.DoRequest(BaseUrl, "POST", redParams);
             return Mapper<RedEnvelope>.MapFromJson(red);
         }
 
-        public static RedEnvelope Retrieve(string redId)
+        public RedEnvelope Retrieve(string redId)
         {
             var url = string.Format("{0}/{1}", BaseUrl, redId);
-            var red = Requestor.DoRequest(url, "GET");
+            var red = base.DoRequest(url, "GET");
             return Mapper<RedEnvelope>.MapFromJson(red);
         }
 
-        public static RedEnvelopeList List(Dictionary<string, object> listParams = null)
+        public RedEnvelopeList List(Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams));
-            var reList = Requestor.DoRequest(url, "GET");
+            var reList = base.DoRequest(url, "GET");
             return Mapper<RedEnvelopeList>.MapFromJson(reList);
         }
 

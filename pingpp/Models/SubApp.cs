@@ -43,10 +43,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static SubAppList List(string appId, Dictionary<string, object> listParams = null)
+        public SubAppList List(string appId, Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(string.Format(BaseUrl, appId), Requestor.CreateQuery(listParams));
-            var subApp = Requestor.DoRequest(url, "GET");
+            var subApp = base.DoRequest(url, "GET");
             return Mapper<SubAppList>.MapFromJson(subApp);
         }
 
@@ -56,10 +56,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static SubApp Create(string appId, Dictionary<string, object> param)
+        public SubApp Create(string appId, Dictionary<string, object> param)
         {
             var url = Requestor.FormatUrl(string.Format(BaseUrl, appId), Requestor.CreateQuery(param));
-            var subApp = Requestor.DoRequest(url, "POST");
+            var subApp = base.DoRequest(url, "POST");
             return Mapper<SubApp>.MapFromJson(subApp);
         }
 
@@ -69,10 +69,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="subAppId"></param>
         /// <returns></returns>
-        public static SubApp Retrieve(string appId, string subAppId) 
+        public SubApp Retrieve(string appId, string subAppId) 
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId), subAppId);
-            var subApp = Requestor.DoRequest(url, "GET");
+            var subApp = base.DoRequest(url, "GET");
             return Mapper<SubApp>.MapFromJson(subApp);
         }
 
@@ -83,10 +83,10 @@ namespace Pingpp.Models
         /// <param name="subAppId"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static SubApp Update(string appId, string subAppId, Dictionary<string, object> param) 
+        public SubApp Update(string appId, string subAppId, Dictionary<string, object> param) 
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId), subAppId);
-            var subApp = Requestor.DoRequest(url, "PUT", param);
+            var subApp = base.DoRequest(url, "PUT", param);
             return Mapper<SubApp>.MapFromJson(subApp);
         }
 
@@ -97,10 +97,10 @@ namespace Pingpp.Models
         /// <param name="subAppId"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static Deleted Delete(string appId, string subAppId)
+        public Deleted Delete(string appId, string subAppId)
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId), subAppId);
-            var subApp = Requestor.DoRequest(url, "DELETE");
+            var subApp = base.DoRequest(url, "DELETE");
             return Mapper<Deleted>.MapFromJson(subApp);
         }
     }

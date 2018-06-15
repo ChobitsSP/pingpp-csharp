@@ -48,10 +48,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="txnId"></param>
         /// <returns></returns>
-        public static BalanceTransaction Retrieve(string appId, string txnId)
+        public BalanceTransaction Retrieve(string appId, string txnId)
         {
             var url = string.Format("{0}/{1}/balance_transactions/{2}", BaseUrl, appId, txnId);
-            var txn = Requestor.DoRequest(url, "GET");
+            var txn = base.DoRequest(url, "GET");
             return Mapper<BalanceTransaction>.MapFromJson(txn);
         }
 
@@ -61,10 +61,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static BalanceTransactionList List(string appId, Dictionary<string, object> listParams = null)
+        public BalanceTransactionList List(string appId, Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(string.Format("{0}/{1}/balance_transactions", BaseUrl, appId), Requestor.CreateQuery(listParams));
-            var txnList = Requestor.DoRequest(url, "GET");
+            var txnList = base.DoRequest(url, "GET");
             return Mapper<BalanceTransactionList>.MapFromJson(txnList);
         }
     }

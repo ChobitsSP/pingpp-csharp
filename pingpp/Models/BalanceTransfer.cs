@@ -44,9 +44,9 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="btParams"></param>
         /// <returns></returns>
-        public static BalanceTransfer Create(string appId, Dictionary<string, object> btParams)
+        public BalanceTransfer Create(string appId, Dictionary<string, object> btParams)
         {
-            var balanceTransfer = Requestor.DoRequest(string.Format(BaseUrl, appId), "POST", btParams);
+            var balanceTransfer = base.DoRequest(string.Format(BaseUrl, appId), "POST", btParams);
             return Mapper<BalanceTransfer>.MapFromJson(balanceTransfer);
         }
         /// <summary>
@@ -55,9 +55,9 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="balanceTransferId"></param>
         /// <returns></returns>
-        public static BalanceTransfer Retrieve(string appId, string balanceTransferId)
+        public BalanceTransfer Retrieve(string appId, string balanceTransferId)
         {
-            var balanceTransfer = Requestor.DoRequest(string.Format("{0}/{1}", string.Format(BaseUrl, appId), balanceTransferId), "GET");
+            var balanceTransfer = base.DoRequest(string.Format("{0}/{1}", string.Format(BaseUrl, appId), balanceTransferId), "GET");
             return Mapper<BalanceTransfer>.MapFromJson(balanceTransfer);
         }
         /// <summary>
@@ -66,9 +66,9 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static BalanceTransferList List(string appId, Dictionary<string, object> listParams = null)
+        public BalanceTransferList List(string appId, Dictionary<string, object> listParams = null)
         {
-            var balanceTransferList = Requestor.DoRequest(Requestor.FormatUrl(String.Format(BaseUrl, appId), Requestor.CreateQuery(listParams)), "GET");
+            var balanceTransferList = base.DoRequest(Requestor.FormatUrl(String.Format(BaseUrl, appId), Requestor.CreateQuery(listParams)), "GET");
             return Mapper<BalanceTransferList>.MapFromJson(balanceTransferList);
         }
     }

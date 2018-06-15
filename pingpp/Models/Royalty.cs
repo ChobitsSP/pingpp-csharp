@@ -56,9 +56,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static RoyaltyList Update(Dictionary<string, object> param) 
+        public RoyaltyList Update(Dictionary<string, object> param) 
         {
-            var royalty = Requestor.DoRequest(BaseUrl, "PUT", param);
+            var royalty = base.DoRequest(BaseUrl, "PUT", param);
             return Mapper<RoyaltyList>.MapFromJson(royalty);
         }
 
@@ -67,10 +67,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="listParam"></param>
         /// <returns></returns>
-        public static RoyaltyList List(Dictionary<string, object> listParam = null) 
+        public RoyaltyList List(Dictionary<string, object> listParam = null) 
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParam));
-            var royalty = Requestor.DoRequest(url, "GET");
+            var royalty = base.DoRequest(url, "GET");
             return Mapper<RoyaltyList>.MapFromJson(royalty);
         }
 
@@ -79,10 +79,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="royaltyId"></param>
         /// <returns></returns>
-        public static Royalty Retrieve(string royaltyId) 
+        public Royalty Retrieve(string royaltyId) 
         {
             var url = string.Format("{0}/{1}", BaseUrl, royaltyId);
-            var royalty = Requestor.DoRequest(url, "GET");
+            var royalty = base.DoRequest(url, "GET");
             return Mapper<Royalty>.MapFromJson(royalty);
         }
     }

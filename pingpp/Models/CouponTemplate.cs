@@ -58,38 +58,38 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/apps";
 
-        public static CouponTemplate Create(string appId, Dictionary<string, object> couTmplParams)
+        public CouponTemplate Create(string appId, Dictionary<string, object> couTmplParams)
         {
             var url = string.Format("{0}/{1}/coupon_templates", BaseUrl, appId);
-            var couTmpl = Requestor.DoRequest(url, "POST", couTmplParams);
+            var couTmpl = base.DoRequest(url, "POST", couTmplParams);
             return Mapper<CouponTemplate>.MapFromJson(couTmpl);
         }
 
-        public static CouponTemplate Retrieve(string appId, string couTmplId)
+        public CouponTemplate Retrieve(string appId, string couTmplId)
         {
             var url = string.Format("{0}/{1}/coupon_templates/{2}", BaseUrl, appId, couTmplId);
-            var couTmpl = Requestor.DoRequest(url, "GET");
+            var couTmpl = base.DoRequest(url, "GET");
             return Mapper<CouponTemplate>.MapFromJson(couTmpl);
         }
 
-        public static CouponTemplate Update(string appId, string couTmplId, Dictionary<string, object> couTmplParams)
+        public CouponTemplate Update(string appId, string couTmplId, Dictionary<string, object> couTmplParams)
         {
             var url = string.Format("{0}/{1}/coupon_templates/{2}", BaseUrl, appId, couTmplId);
-            var couTmpl = Requestor.DoRequest(url, "PUT", couTmplParams);
+            var couTmpl = base.DoRequest(url, "PUT", couTmplParams);
             return Mapper<CouponTemplate>.MapFromJson(couTmpl);
         }
 
-        public static Deleted Delete(string appId, string couTmplId)
+        public Deleted Delete(string appId, string couTmplId)
         {
             var url = string.Format("{0}/{1}/coupon_templates/{2}", BaseUrl, appId, couTmplId);
-            var deletedMsg = Requestor.DoRequest(url, "DELETE");
+            var deletedMsg = base.DoRequest(url, "DELETE");
             return Mapper<Deleted>.MapFromJson(deletedMsg);
         }
 
-        public static CouponTemplateList List(string appId, Dictionary<string, object> listParams = null)
+        public CouponTemplateList List(string appId, Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(string.Format("{0}/{1}/coupon_templates", BaseUrl, appId), Requestor.CreateQuery(listParams));
-            var couTmplList = Requestor.DoRequest(url, "GET");
+            var couTmplList = base.DoRequest(url, "GET");
             return Mapper<CouponTemplateList>.MapFromJson(couTmplList);
         }
 

@@ -62,10 +62,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="batchwrParams"></param>
         /// <returns></returns>
-        public static BatchWithdrawal Create(string appId, Dictionary<string, object> batchwrParams)
+        public BatchWithdrawal Create(string appId, Dictionary<string, object> batchwrParams)
         {
             var url = string.Format("{0}/{1}/batch_withdrawals", BaseUrl, appId);
-            var batchWithdrawal = Requestor.DoRequest(url, "POST", batchwrParams);
+            var batchWithdrawal = base.DoRequest(url, "POST", batchwrParams);
             return Mapper<BatchWithdrawal>.MapFromJson(batchWithdrawal);
         }
 
@@ -75,10 +75,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="batchWithdrawalId"></param>
         /// <returns></returns>
-        public static BatchWithdrawal Retrieve(string appId, string batchWithdrawalId)
+        public BatchWithdrawal Retrieve(string appId, string batchWithdrawalId)
         {
             var url = string.Format("{0}/{1}/batch_withdrawals/{2}", BaseUrl, appId, batchWithdrawalId);
-            var batchWithdrawal = Requestor.DoRequest(url, "GET");
+            var batchWithdrawal = base.DoRequest(url, "GET");
             return Mapper<BatchWithdrawal>.MapFromJson(batchWithdrawal);
         }
 
@@ -88,10 +88,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static BatchWithdrawalList List(string appId, Dictionary<string, object> listParams = null)
+        public BatchWithdrawalList List(string appId, Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(string.Format("{0}/{1}/batch_withdrawals", BaseUrl, appId), Requestor.CreateQuery(listParams));
-            var batchWithdrawalList = Requestor.DoRequest(url, "GET", listParams);
+            var batchWithdrawalList = base.DoRequest(url, "GET", listParams);
             return Mapper<BatchWithdrawalList>.MapFromJson(batchWithdrawalList);
         }
     }

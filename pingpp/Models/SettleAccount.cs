@@ -32,10 +32,10 @@ namespace Pingpp.Models
         /// <param name="userId"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static SettleAccount Create(string appId, string userId, Dictionary<string, object> param) 
+        public SettleAccount Create(string appId, string userId, Dictionary<string, object> param) 
         {
             var url = string.Format(BaseUrl, appId, userId);
-            var settleAccount = Requestor.DoRequest(url, "POST", param);
+            var settleAccount = base.DoRequest(url, "POST", param);
             return Mapper<SettleAccount>.MapFromJson(settleAccount);
         }
 
@@ -46,10 +46,10 @@ namespace Pingpp.Models
         /// <param name="userId"></param>
         /// <param name="settleAccountId"></param>
         /// <returns></returns>
-        public static SettleAccount Retrieve(string appId, string userId, string settleAccountId)
+        public SettleAccount Retrieve(string appId, string userId, string settleAccountId)
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId, userId), settleAccountId);
-            var settleAccount = Requestor.DoRequest(url, "GET");
+            var settleAccount = base.DoRequest(url, "GET");
             return Mapper<SettleAccount>.MapFromJson(settleAccount);
         }
 
@@ -60,10 +60,10 @@ namespace Pingpp.Models
         /// <param name="userId"></param>
         /// <param name="settleAccountId"></param>
         /// <returns></returns>
-        public static Deleted Delete(string appId, string userId, string settleAccountId) 
+        public Deleted Delete(string appId, string userId, string settleAccountId) 
         {
             var url = string.Format("{0}/{1}", string.Format(BaseUrl, appId, userId), settleAccountId);
-            var settleAccount = Requestor.DoRequest(url, "DELETE");
+            var settleAccount = base.DoRequest(url, "DELETE");
             return Mapper<Deleted>.MapFromJson(settleAccount);
         }
 
@@ -74,10 +74,10 @@ namespace Pingpp.Models
         /// <param name="userId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static SettleAccountList List(string appId, string userId, Dictionary<string, object> listParams = null) 
+        public SettleAccountList List(string appId, string userId, Dictionary<string, object> listParams = null) 
         {
             var url = Requestor.FormatUrl(string.Format(BaseUrl, appId, userId), Requestor.CreateQuery(listParams));
-            var setList = Requestor.DoRequest(url, "GET");
+            var setList = base.DoRequest(url, "GET");
             return Mapper<SettleAccountList>.MapFromJson(setList);
         }
     }

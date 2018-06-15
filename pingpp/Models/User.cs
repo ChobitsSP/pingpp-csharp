@@ -64,45 +64,45 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/apps";
 
-        public static User Create(string appId, Dictionary<string, object> uParams)
+        public User Create(string appId, Dictionary<string, object> uParams)
         {
             var url = string.Format("{0}/{1}/users", BaseUrl, appId);
-            var user = Requestor.DoRequest(url, "POST", uParams);
+            var user = base.DoRequest(url, "POST", uParams);
             return Mapper<User>.MapFromJson(user);
         }
 
-        public static User Retrieve(string appId, string uid)
+        public User Retrieve(string appId, string uid)
         {
             var url = string.Format("{0}/{1}/users/{2}", BaseUrl, appId, uid);
-            var user = Requestor.DoRequest(url, "GET");
+            var user = base.DoRequest(url, "GET");
             return Mapper<User>.MapFromJson(user);
         }
 
-        public static User Update(string appId, string uid, Dictionary<string, object> uParams)
+        public User Update(string appId, string uid, Dictionary<string, object> uParams)
         {
             var url = string.Format("{0}/{1}/users/{2}", BaseUrl, appId, uid);
-            var user = Requestor.DoRequest(url, "PUT", uParams);
+            var user = base.DoRequest(url, "PUT", uParams);
             return Mapper<User>.MapFromJson(user);
         }
 
-        public static User Disable(string appId, string uid)
+        public User Disable(string appId, string uid)
         {
             var url = string.Format("{0}/{1}/users/{2}", BaseUrl, appId, uid);
-            var user = Requestor.DoRequest(url, "PUT", new Dictionary<string, object>() { { "disabled", true } });
+            var user = base.DoRequest(url, "PUT", new Dictionary<string, object>() { { "disabled", true } });
             return Mapper<User>.MapFromJson(user);
         }
 
-        public static User Enable(string appId, string uid)
+        public User Enable(string appId, string uid)
         {
             var url = string.Format("{0}/{1}/users/{2}", BaseUrl, appId, uid);
-            var user = Requestor.DoRequest(url, "PUT", new Dictionary<string, object>() { { "disabled", false } });
+            var user = base.DoRequest(url, "PUT", new Dictionary<string, object>() { { "disabled", false } });
             return Mapper<User>.MapFromJson(user);
         }
 
-        public static UserList List(string appId, Dictionary<string, object> listParams = null)
+        public UserList List(string appId, Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(string.Format("{0}/{1}/users", BaseUrl, appId), Requestor.CreateQuery(listParams));
-            var userList = Requestor.DoRequest(url, "GET");
+            var userList = base.DoRequest(url, "GET");
             return Mapper<UserList>.MapFromJson(userList);
         }
 

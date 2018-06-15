@@ -40,10 +40,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="royaltyTransactionId"></param>
         /// <returns></returns>
-        public static RoyaltyTransaction Retrieve(string royaltyTransactionId) 
+        public RoyaltyTransaction Retrieve(string royaltyTransactionId) 
         {
             var url = string.Format("{0}/{1}", BaseUrl, royaltyTransactionId);
-            var roTransaction = Requestor.DoRequest(url, "GET");
+            var roTransaction = base.DoRequest(url, "GET");
             return Mapper<RoyaltyTransaction>.MapFromJson(roTransaction);
         }
 
@@ -52,10 +52,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="listParam"></param>
         /// <returns></returns>
-        public static RoyaltyTransactionList List(Dictionary<string, object> listParam = null) 
+        public RoyaltyTransactionList List(Dictionary<string, object> listParam = null) 
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParam));
-            var roTransaction = Requestor.DoRequest(url, "GET");
+            var roTransaction = base.DoRequest(url, "GET");
             return Mapper<RoyaltyTransactionList>.MapFromJson(roTransaction);
         }
     }

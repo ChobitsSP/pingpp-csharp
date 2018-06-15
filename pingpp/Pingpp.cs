@@ -5,55 +5,55 @@ using Pingpp.Exception;
 
 namespace Pingpp
 {
-    public abstract class Pingpp
+    public abstract partial class Pingpp
     {
-        public static volatile string ApiVersion;
-        public static volatile string AcceptLanguage = "zh-CN";
-        public static volatile string ApiBase = "https://api.pingxx.com";
-        public static volatile string Version = "1.4.5";
-        public static volatile bool BadGateWayMatch = true;
-        public static volatile int MaxNetworkRetries = 1;
-        protected static volatile int MaxRetry = 0;
-        public static int DefaultTimeout = 80000;
-        public static int DefaultReadAndWriteTimeout = 20000;
-        public static volatile string ApiKey;
-        public static volatile byte[] PrivateKey;
+        public string ApiVersion { get; set; }
+        public string AcceptLanguage { get; set; } = "zh-CN";
+        public string ApiBase { get; set; } = "https://api.pingxx.com";
+        public string Version { get; set; } = "1.4.5";
+        public bool BadGateWayMatch { get; set; } = true;
+        public int MaxNetworkRetries { get; set; } = 1;
+        protected int MaxRetry { get; set; } = 0;
+        public int DefaultTimeout { get; set; } = 80000;
+        public int DefaultReadAndWriteTimeout { get; set; } = 20000;
+        public string ApiKey { get; set; }
+        public byte[] PrivateKey { get; private set; }
 
-        public static void SetMaxNetworkRetries(int maxNetworkRetries) 
+        public void SetMaxNetworkRetries(int maxNetworkRetries)
         {
             MaxNetworkRetries = maxNetworkRetries;
         }
 
-        public static void SetBadGateWayMatch(bool badGateWayMatch)
+        public void SetBadGateWayMatch(bool badGateWayMatch)
         {
             BadGateWayMatch = badGateWayMatch;
         }
 
-        public static void SetApiBase(string newApiBase) 
+        public void SetApiBase(string newApiBase)
         {
             ApiBase = newApiBase;
         }
-        internal static string GetApiKey()
+        internal string GetApiKey()
         {
             return ApiKey;
         }
 
-        public static void SetApiKey(string newApiKey)
+        public void SetApiKey(string newApiKey)
         {
             ApiKey = newApiKey;
         }
 
-        internal static byte[] GetPrivateKey()
+        internal byte[] GetPrivateKey()
         {
             return PrivateKey;
         }
 
-        public static void SetPrivateKey(string newPrivateKey)
+        public void SetPrivateKey(string newPrivateKey)
         {
             PrivateKey = FormatPrivateKey(newPrivateKey);
         }
 
-        public static void SetPrivateKeyPath(string newPrivateKeyPath)
+        public void SetPrivateKeyPath(string newPrivateKeyPath)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace Pingpp
             return JsonConvert.SerializeObject(this);
         }
 
-        private static byte[] FormatPrivateKey(string privateKeyContent)
+        private byte[] FormatPrivateKey(string privateKeyContent)
         {
             privateKeyContent = privateKeyContent.Replace("\r", "").Replace("\n", "");
             if (privateKeyContent.StartsWith("-----BEGIN RSA PRIVATE KEY-----"))

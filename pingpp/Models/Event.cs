@@ -33,10 +33,10 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/events";
 
-        public static Event Retrieve(string id)
+        public Event Retrieve(string id)
         {
             var url = string.Format("{0}/{1}", BaseUrl, id);
-            var evt = Requestor.DoRequest(url, "Get");
+            var evt = base.DoRequest(url, "Get");
             return Mapper<Event>.MapFromJson(evt);
         }
      

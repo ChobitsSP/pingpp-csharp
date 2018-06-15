@@ -94,20 +94,20 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/charges";
 
-        public static Charge Create(Dictionary<string, object> chParams)
+        public Charge Create(Dictionary<string, object> chParams)
         {
-            var ch = Requestor.DoRequest(BaseUrl, "POST", chParams);
+            var ch = base.DoRequest(BaseUrl, "POST", chParams);
             return Mapper<Charge>.MapFromJson(ch);
         }
 
-        public static Charge Retrieve(string id)
+        public Charge Retrieve(string id)
         {
             var url = string.Format("{0}/{1}", BaseUrl, id);
-            var ch = Requestor.DoRequest(url, "GET");
+            var ch = base.DoRequest(url, "GET");
             return Mapper<Charge>.MapFromJson(ch);
         }
 
-        public static ChargeList List(Dictionary<string, object> listParams = null)
+        public ChargeList List(Dictionary<string, object> listParams = null)
         {
             object value;
             if (listParams != null && listParams.TryGetValue("app", out value))
@@ -128,7 +128,7 @@ namespace Pingpp.Models
             }
 
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams));
-            var ch = Requestor.DoRequest(url, "GET");
+            var ch = base.DoRequest(url, "GET");
             return Mapper<ChargeList>.MapFromJson(ch);
         }
 
@@ -141,10 +141,10 @@ namespace Pingpp.Models
         /// <param name="id"></param>
         /// <param name="chParams"></param>
         /// <returns></returns>
-        public static Charge Reverse(string id, Dictionary<string,object> chParams = null) 
+        public Charge Reverse(string id, Dictionary<string,object> chParams = null) 
         {
             var url = string.Format("{0}/{1}/reverse", BaseUrl, id);
-            var ch = Requestor.DoRequest(url, "POST", chParams);
+            var ch = base.DoRequest(url, "POST", chParams);
             return Mapper<Charge>.MapFromJson(ch);
         }
     }

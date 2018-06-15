@@ -49,9 +49,9 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="bonusParams"></param>
         /// <returns></returns>
-        public static BalanceBonus Create(string appId, Dictionary<string, object> bonusParams) 
+        public BalanceBonus Create(string appId, Dictionary<string, object> bonusParams) 
         {
-            var balanceBonus = Requestor.DoRequest(string.Format(BaseUrl, appId), "POST", bonusParams);
+            var balanceBonus = base.DoRequest(string.Format(BaseUrl, appId), "POST", bonusParams);
             return Mapper<BalanceBonus>.MapFromJson(balanceBonus);
         }
 
@@ -61,9 +61,9 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="balanceBonusId"></param>
         /// <returns></returns>
-        public static BalanceBonus Retrieve(string appId, string balanceBonusId) 
+        public BalanceBonus Retrieve(string appId, string balanceBonusId) 
         {
-            var balanceBonus = Requestor.DoRequest(string.Format("{0}/{1}",string.Format(BaseUrl,appId),balanceBonusId), "GET");
+            var balanceBonus = base.DoRequest(string.Format("{0}/{1}",string.Format(BaseUrl,appId),balanceBonusId), "GET");
             return Mapper<BalanceBonus>.MapFromJson(balanceBonus);
         }
 
@@ -73,9 +73,9 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static BalanceBonusList List(string appId, Dictionary<string, object> listParams = null) 
+        public BalanceBonusList List(string appId, Dictionary<string, object> listParams = null) 
         {
-            var balanceBonusList = Requestor.DoRequest(Requestor.FormatUrl(String.Format(BaseUrl,appId), Requestor.CreateQuery(listParams)),"GET");
+            var balanceBonusList = base.DoRequest(Requestor.FormatUrl(String.Format(BaseUrl,appId), Requestor.CreateQuery(listParams)),"GET");
             return Mapper<BalanceBonusList>.MapFromJson(balanceBonusList);
         }
 

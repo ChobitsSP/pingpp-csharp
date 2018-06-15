@@ -48,23 +48,23 @@ namespace Pingpp.Models
         public bool Livemode { get; set; }
 
         private const string BaseUrl = "/v1/batch_refunds";
-        public static BatchRefund Create(Dictionary<string, object> bfParams)
+        public BatchRefund Create(Dictionary<string, object> bfParams)
         {
-            var re = Requestor.DoRequest(BaseUrl, "POST", bfParams);
+            var re = base.DoRequest(BaseUrl, "POST", bfParams);
             return Mapper<BatchRefund>.MapFromJson(re);
         }
 
-        public static BatchRefund Retrieve(string batchRefundId)
+        public BatchRefund Retrieve(string batchRefundId)
         {
             var url = string.Format("{0}/{1}", BaseUrl, batchRefundId);
-            var re = Requestor.DoRequest(url, "GET");
+            var re = base.DoRequest(url, "GET");
             return Mapper<BatchRefund>.MapFromJson(re);
         }
 
-        public static BatchRefundList List(Dictionary<string, object> listParams = null)
+        public BatchRefundList List(Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams));
-            var re = Requestor.DoRequest(url, "GET");
+            var re = base.DoRequest(url, "GET");
             return Mapper<BatchRefundList>.MapFromJson(re);
         }
     }

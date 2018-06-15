@@ -68,10 +68,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="balanceSettlementId"></param>
         /// <returns></returns>
-        public static BalanceSettlement Retrieve(string appId, string balanceSettlementId)
+        public BalanceSettlement Retrieve(string appId, string balanceSettlementId)
         {
 
-            var balanceSettlement = Requestor.DoRequest(string.Format("{0}/{1}", string.Format(BaseUrl, appId), balanceSettlementId), "GET");
+            var balanceSettlement = base.DoRequest(string.Format("{0}/{1}", string.Format(BaseUrl, appId), balanceSettlementId), "GET");
             return Mapper<BalanceSettlement>.MapFromJson(balanceSettlement);
         }
         
@@ -81,9 +81,9 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static BalanceSettlementList List (string appId, Dictionary<string, object> listParams = null)
+        public BalanceSettlementList List (string appId, Dictionary<string, object> listParams = null)
         {
-            var balanceTransferList = Requestor.DoRequest(Requestor.FormatUrl(string.Format(BaseUrl, appId), Requestor.CreateQuery(listParams)), "GET");
+            var balanceTransferList = base.DoRequest(Requestor.FormatUrl(string.Format(BaseUrl, appId), Requestor.CreateQuery(listParams)), "GET");
             return Mapper<BalanceSettlementList>.MapFromJson(balanceTransferList);
         }
     }

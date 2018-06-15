@@ -66,23 +66,23 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/transfers";
 
-        public static Transfer Create(Dictionary<string, object> trParams)
+        public Transfer Create(Dictionary<string, object> trParams)
         {
-            var transfer = Requestor.DoRequest(BaseUrl, "POST", trParams);
+            var transfer = base.DoRequest(BaseUrl, "POST", trParams);
             return Mapper<Transfer>.MapFromJson(transfer);
         }
 
-        public static Transfer Retrieve(string trId)
+        public Transfer Retrieve(string trId)
         {
             var url = string.Format("{0}/{1}", BaseUrl, trId);
-            var transfer = Requestor.DoRequest(url, "GET");
+            var transfer = base.DoRequest(url, "GET");
             return Mapper<Transfer>.MapFromJson(transfer);
         }
 
-        public static TransferList List(Dictionary<string, object> listParams = null)
+        public TransferList List(Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams));
-            var transferList = Requestor.DoRequest(url, "GET");
+            var transferList = base.DoRequest(url, "GET");
             return Mapper<TransferList>.MapFromJson(transferList);
         }   
     }

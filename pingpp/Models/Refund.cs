@@ -55,24 +55,24 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/charges";
 
-        public static Refund Create(string id, Dictionary<string, object> reParams)
+        public Refund Create(string id, Dictionary<string, object> reParams)
         {
             var url = string.Format("{0}/{1}/refunds", BaseUrl, id);
-            var re = Requestor.DoRequest(url, "POST", reParams);
+            var re = base.DoRequest(url, "POST", reParams);
             return Mapper<Refund>.MapFromJson(re);
         }
 
-        public static Refund Retrieve(string chId, string reId)
+        public Refund Retrieve(string chId, string reId)
         {
             var url = string.Format("/v1/charges/{0}/refunds/{1}", chId, reId);
-            var re = Requestor.DoRequest(url, "Get");
+            var re = base.DoRequest(url, "Get");
             return Mapper<Refund>.MapFromJson(re);
         }
 
-        public static RefundList List(string id, Dictionary<string, object> listParams = null)
+        public RefundList List(string id, Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(string.Format("/v1/charges/{0}/refunds", id), Requestor.CreateQuery(listParams));
-            var refundList = Requestor.DoRequest(url, "Get");
+            var refundList = base.DoRequest(url, "Get");
             return Mapper<RefundList>.MapFromJson(refundList);
         }
 

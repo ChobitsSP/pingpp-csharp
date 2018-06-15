@@ -79,10 +79,10 @@ namespace Pingpp.Models
         /// <param name="uid"></param>
         /// <param name="wdParams"></param>
         /// <returns></returns>
-        public static Withdrawal Request(string appId, Dictionary<string, object> wdParams)
+        public Withdrawal Request(string appId, Dictionary<string, object> wdParams)
         {
             var url = string.Format("{0}/{1}/withdrawals", BaseUrl, appId);
-            var wd = Requestor.DoRequest(url, "POST", wdParams);
+            var wd = base.DoRequest(url, "POST", wdParams);
             return Mapper<Withdrawal>.MapFromJson(wd);
         }
 
@@ -93,10 +93,10 @@ namespace Pingpp.Models
         /// <param name="uid"></param>
         /// <param name="wdId"></param>
         /// <returns></returns>
-        public static Withdrawal Cancel(string appId, string wdId)
+        public Withdrawal Cancel(string appId, string wdId)
         {
             var url = string.Format("{0}/{1}/withdrawals/{2}", BaseUrl, appId, wdId);
-            var wd = Requestor.DoRequest(url, "PUT", new Dictionary<string, object> { { "status", "canceled" } });
+            var wd = base.DoRequest(url, "PUT", new Dictionary<string, object> { { "status", "canceled" } });
             return Mapper<Withdrawal>.MapFromJson(wd);
         }
 
@@ -107,10 +107,10 @@ namespace Pingpp.Models
         /// <param name="uid"></param>
         /// <param name="wdId"></param>
         /// <returns></returns>
-        public static Withdrawal Confirm(string appId, string wdId)
+        public Withdrawal Confirm(string appId, string wdId)
         {
             var url = string.Format("{0}/{1}/withdrawals/{2}", BaseUrl, appId, wdId);
-            var wd = Requestor.DoRequest(url, "PUT", new Dictionary<string, object> { { "status", "pending" } });
+            var wd = base.DoRequest(url, "PUT", new Dictionary<string, object> { { "status", "pending" } });
             return Mapper<Withdrawal>.MapFromJson(wd);
         }
 
@@ -120,10 +120,10 @@ namespace Pingpp.Models
         /// <param name="appId"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static WithdrawalList List(string appId, Dictionary<string, object> listParams)
+        public WithdrawalList List(string appId, Dictionary<string, object> listParams)
         {
             var url = Requestor.FormatUrl(string.Format("{0}/{1}/withdrawals", BaseUrl, appId), Requestor.CreateQuery(listParams));
-            var wd = Requestor.DoRequest(url, "GET");
+            var wd = base.DoRequest(url, "GET");
             return Mapper<WithdrawalList>.MapFromJson(wd);
         }
 
@@ -134,10 +134,10 @@ namespace Pingpp.Models
         /// <param name="userId"></param>
         /// <param name="wdId"></param>
         /// <returns></returns>
-        public static Withdrawal Retrieve(string appId, string wdId)
+        public Withdrawal Retrieve(string appId, string wdId)
         {
             var url = string.Format("{0}/{1}/withdrawals/{2}", BaseUrl,appId, wdId);
-            var wd = Requestor.DoRequest(url, "GET");
+            var wd = base.DoRequest(url, "GET");
             return Mapper<Withdrawal>.MapFromJson(wd);
         }
     }

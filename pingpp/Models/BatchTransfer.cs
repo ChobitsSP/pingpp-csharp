@@ -54,9 +54,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="btParams"></param>
         /// <returns></returns>
-        public static BatchTransfer Create(Dictionary<string, object> btParams) 
+        public BatchTransfer Create(Dictionary<string, object> btParams) 
         {
-            var batchTranster = Requestor.DoRequest(BaseUrl, "POST", btParams);
+            var batchTranster = base.DoRequest(BaseUrl, "POST", btParams);
             return Mapper<BatchTransfer>.MapFromJson(batchTranster);
         }
 
@@ -65,10 +65,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="batchTransferNo"></param>
         /// <returns></returns>
-        public static BatchTransfer Retrieve(string batchTransferNo) 
+        public BatchTransfer Retrieve(string batchTransferNo) 
         {
             var url = string.Format("{0}/{1}", BaseUrl, batchTransferNo);
-            var batchTranster = Requestor.DoRequest(url, "GET");
+            var batchTranster = base.DoRequest(url, "GET");
             return Mapper<BatchTransfer>.MapFromJson(batchTranster);
         }
 
@@ -77,10 +77,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="btParams"></param>
         /// <returns></returns>
-        public static BatchTransferList List(Dictionary<string, object> btParams)
+        public BatchTransferList List(Dictionary<string, object> btParams)
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(btParams));
-            var batchTranster = Requestor.DoRequest(url, "GET");
+            var batchTranster = base.DoRequest(url, "GET");
             return Mapper<BatchTransferList>.MapFromJson(batchTranster);
         }
     }

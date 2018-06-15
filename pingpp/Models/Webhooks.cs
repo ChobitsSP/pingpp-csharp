@@ -8,7 +8,7 @@ namespace Pingpp.Models
 {
     public class Webhooks : Pingpp
     {
-        public static Event ParseWebhook(string events)
+        public Event ParseWebhook(string events)
         {
             var evt = JObject.Parse(events);
             var obj = evt.SelectToken("object");

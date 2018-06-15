@@ -114,6 +114,7 @@
     <Compile Include="Net\Mapper.cs" />
     <Compile Include="Net\Requestor.cs" />
     <Compile Include="Pingpp.cs" />
+    <Compile Include="PingppClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\OAuthResult.cs" />
     <Compile Include="Utils\RsaUtils.cs" />

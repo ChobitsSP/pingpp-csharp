@@ -103,9 +103,9 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="orParams"></param>
         /// <returns></returns>
-        public static Order Create(Dictionary<string, object> orParams)
+        public Order Create(Dictionary<string, object> orParams)
         {
-            var or = Requestor.DoRequest(BaseUrl, "POST", orParams);
+            var or = base.DoRequest(BaseUrl, "POST", orParams);
             return Mapper<Order>.MapFromJson(or);
         }
 
@@ -114,10 +114,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Order Retrieve(string id)
+        public Order Retrieve(string id)
         {
             var url = string.Format("{0}/{1}", BaseUrl, id);
-            var or = Requestor.DoRequest(url, "GET");
+            var or = base.DoRequest(url, "GET");
             return Mapper<Order>.MapFromJson(or);
         }
 
@@ -127,10 +127,10 @@ namespace Pingpp.Models
         /// <param name="id"></param>
         /// <param name="payParams"></param>
         /// <returns></returns>
-        public static Order Pay(string id, Dictionary<string, object> payParams = null)
+        public Order Pay(string id, Dictionary<string, object> payParams = null)
         {
             var url = string.Format("{0}/{1}/pay", BaseUrl, id);
-            var or = Requestor.DoRequest(url, "POST", payParams);
+            var or = base.DoRequest(url, "POST", payParams);
             return Mapper<Order>.MapFromJson(or);
         }
 
@@ -140,7 +140,7 @@ namespace Pingpp.Models
         /// <param name="id"></param>
         /// <param name="cancelParams"></param>
         /// <returns></returns>
-        public static Order Cancel(string id, Dictionary<string,object> cancelParams = null)
+        public Order Cancel(string id, Dictionary<string,object> cancelParams = null)
         {
             var url = string.Format("{0}/{1}", BaseUrl, id);
             if (cancelParams == null)
@@ -150,7 +150,7 @@ namespace Pingpp.Models
             if (!cancelParams.ContainsKey("status")) {
                 cancelParams.Add("status", "canceled");
             }
-            var or = Requestor.DoRequest(url, "PUT", cancelParams);
+            var or = base.DoRequest(url, "PUT", cancelParams);
             return Mapper<Order>.MapFromJson(or);
         }
 
@@ -159,10 +159,10 @@ namespace Pingpp.Models
         /// </summary>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static OrderList List(Dictionary<string, object> listParams = null)
+        public OrderList List(Dictionary<string, object> listParams = null)
         {
             var url = Requestor.FormatUrl(BaseUrl, Requestor.CreateQuery(listParams));
-            var or = Requestor.DoRequest(url, "GET");
+            var or = base.DoRequest(url, "GET");
             return Mapper<OrderList>.MapFromJson(or);
         }
 
@@ -172,10 +172,10 @@ namespace Pingpp.Models
         /// <param name="id"></param>
         /// <param name="listParams"></param>
         /// <returns></returns>
-        public static ChargeList ChargeList(string id,Dictionary<string ,object> listParams = null)
+        public ChargeList ChargeList(string id,Dictionary<string ,object> listParams = null)
         {
             var url = Requestor.FormatUrl(string.Format("{0}/{1}/charges", BaseUrl, id), Requestor.CreateQuery(listParams));
-            var charges = Requestor.DoRequest(url, "GET");
+            var charges = base.DoRequest(url, "GET");
             return Mapper<ChargeList>.MapFromJson(charges);
         }
 
@@ -185,10 +185,10 @@ namespace Pingpp.Models
         /// <param name="id"></param>
         /// <param name="chargeId"></param>
         /// <returns></returns>
-        public static Charge ChargeRetrieve(string id, string chargeId)
+        public Charge ChargeRetrieve(string id, string chargeId)
         {
             var url = string.Format("{0}/{1}/charges/{2}", BaseUrl, id, chargeId);
-            var charge = Requestor.DoRequest(url, "GET");
+            var charge = base.DoRequest(url, "GET");
             return Mapper<Charge>.MapFromJson(charge);
         }
     }

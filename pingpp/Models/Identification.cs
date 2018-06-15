@@ -27,9 +27,9 @@ namespace Pingpp.Models
 
         private const string BaseUrl = "/v1/identification";
 
-        public static Identification Identify(Dictionary<string, object> iParams)
+        public Identification Identify(Dictionary<string, object> iParams)
         {
-            var identified = Requestor.DoRequest(BaseUrl, "POST", iParams);
+            var identified = base.DoRequest(BaseUrl, "POST", iParams);
             return Mapper<Identification>.MapFromJson(identified);
         }
 
